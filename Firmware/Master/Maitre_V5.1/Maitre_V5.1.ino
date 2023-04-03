@@ -3,14 +3,19 @@
 // ATmega328P
 // sur COM3
 
-
 ///////////////////
 // Modifications //
 ///////////////////
 // Version 0: Initial
-// Version 1: décomposaition boucle principale en sous programme + (Lib_x.h)
-//            aucune autre modif
-
+// Version 1: décomposition boucle principale en sous programme + (Lib_x.h)
+// Version 2: ajout "millis" pour éviter l'interruption du programme
+// Version 3: ajout carte IoT Tuya      //********************
+// Version 4: ajout l'envoie de la donnée 'P3_Delta' via Tuya
+//            prévoir le controle des I/O                                ==> Ne compile par sur nano
+//
+// Attention : Le forcage de l'ECS via la variable "CptDemandeForcageECS" risque de poser pb suite à la suppression du delay dans loop ( à contrôler )
+// Version 5: Passage sur nano every
+//            prévoir le controle des I/O
 
 #include <Wire.h>
 #include "Lib_Variables.h"
@@ -18,7 +23,7 @@
 #include "Lib_ECS.h"
 #include "Lib_Calcul.h"
 #include "Lib_Mesures.h"
-
+#include "Lib_Echange_IoT_Tuya.h"      //********************
 
 void setup()
 {
@@ -33,8 +38,9 @@ pinMode (LED_BUILTIN, OUTPUT);
 
  Affichage_Init();
  Affichage_Presentation();
- ECS_Start();
- 
+ ECS_Start();                     // préparation com avec l'arduino esclave pour le variateur ECS
+ IoT_Tuya_Start ();               // préparation com avec la carte IoT Tuya pour l'application smartphone SmartLife     ********************
+  
  Start=millis();
  
 }
@@ -92,23 +98,23 @@ if ((digitalRead(3)==HIGH) && (digitalRead(4)==LOW))
 
 void loop()
 {
+  if ((millis()-Start)>2000)           // Execution toute les 2000ms (Si modification voir CptEnergieECS)
+   {
 
- if ((millis()-Start)>2000)
-{
+    //MESURES--------------------------------------------------------------------------------------------------------------
+    Mesures();
+  
+    //AFFICHAGE LCD -------------------------------------------------------------------------------------------------------
+    Affichage();
 
-//Mesures
-  Mesures();
-//AFFICHAGE LCD -------------------------------------------------------------------------------------------------------
-  Affichage();
+    //TRANSMISSIONS CONSIGNE VARIATEUR ECS A L'ARDUINO ESCLAVE-------------------------------------------------------------
+    ECS_Send(ConsVarECS);
 
-//Transmission valeur ECS-----------------------------------------------------------------------------------------------
-  ECS_Send(ConsVarECS);
+    //ECHANGE DE DONNÉES AVEC LA CARTE IoT TUYA----------------------------------------------------------------------------     ********************
+    IoT_Tuya_Send ();                                                                                                       //********************
 
-  Serial.println("boucle");
- 
-  Start=millis();
-}
+    //  Serial.println();
 
-//delay(2000);           // Si modification voir CptEnergieECS
-
+    Start=millis();
+  }
 }

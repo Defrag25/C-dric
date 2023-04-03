@@ -23,7 +23,7 @@
 #include "Lib_ECS.h"
 #include "Lib_Calcul.h"
 #include "Lib_Mesures.h"
-//#include "Lib_Echange_IoT_Tuya.h"      //********************
+#include "Lib_Echange_IoT_Tuya.h"      //********************
 
 void setup()
 {

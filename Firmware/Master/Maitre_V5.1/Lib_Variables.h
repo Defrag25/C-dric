@@ -1,6 +1,5 @@
 // Librairie de définition des variables Globales 
 
-
 // DECLARATION ET INITIALISATION DES VARIABLES-------------------------------------------------------------------------
 float U1 = 0;             //exprimé en V
 float I1 = 0;             //exprimé en A

@@ -14,13 +14,13 @@ void Affichage_Init(){
 
 void Affichage_Presentation(){
  lcd.setCursor(0, 0);                
- lcd.print("**                **");
+ lcd.print(F("**                **"));
  lcd.setCursor(7,1);                 
- lcd.print("Bonjour");
+ lcd.print(F("Bonjour"));
  lcd.setCursor(8, 2);               
- lcd.print("CATZ");
+ lcd.print(F("CATZ"));
  lcd.setCursor(0, 3);               
- lcd.print("**                **");
+ lcd.print(F("**                **"));
 }
 
 void Affichage(){
@@ -32,7 +32,7 @@ void Affichage(){
 //lcd.noBacklight();
 lcd.clear();
 lcd.setCursor(1,0);
-lcd.print ("Menu 0 noBacklight");
+lcd.print (F("Menu 0 noBacklight"));
 break;
 }
   case 1:   {                                //Affichage MENU 1

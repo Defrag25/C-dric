@@ -27,10 +27,10 @@ if (isnan(U1) || isnan(I1) || isnan(P1)|| isnan(W1))
 void PZEM_MesurePhotovoltaique(){
 
 // Multimètre PZEM 2 Photovoltaique
-float U2 = pzem2.voltage();               //exprimé en V
-float I2 = pzem2.current();               //exprimé en A
-float P2 = pzem2.power();                 //exprimé en W 
-float W2 = pzem2.energy();                //exprimé en Wh
+ U2 = pzem2.voltage();               //exprimé en V
+ I2 = pzem2.current();               //exprimé en A
+ P2 = pzem2.power();                 //exprimé en W 
+ W2 = pzem2.energy();                //exprimé en Wh
 
 if (isnan(U2) || isnan(I2) || isnan(P2)|| isnan(W2)) 
     {

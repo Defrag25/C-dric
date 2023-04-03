@@ -1,7 +1,6 @@
 // Calcul de régulation
 //
 void process_calcul(){
-
   
 if (P3_Delta > 300 && ConsVarECS_Calculee < 100)  {
     ConsVarECS_Calculee = ConsVarECS_Calculee + 15;           //+221.25W
@@ -132,7 +131,5 @@ if (P3_Delta > 15)   {
 if ((digitalRead(2)==LOW) &&  CptEnergieECS < 6000)   {
   CptEnergieEcsEDF = CptEnergieEcsEDF + (1600*U1/230*TpsCycle/3600);         // Ajout 1600W (Pmaxi chauffe eau) * U1 (tension réelle) / 230 (tension théorique) * temps de cycle / 3600 (conversion en heure)
   }
-
-
 
 }

@@ -1,10 +1,8 @@
 // Librairie de gestion de l'ECS
 // L'ECS est piloté par le module esclave (Arduino Slave d'adresse 2C_SLAVE_SCR=0x09)
 
-
 // Définition des adresses logiques des esclaves I2C.
 #define I2C_SLAVE_SCR 9
-
 
 void ECS_Start(){
    // Initialise la library Wire et se connecte au bus I2C en tant que maître 
